@@ -1,0 +1,220 @@
+{% extends "base.html"%}
+{%load static%}
+
+  {% block header %}      
+        <a href="#" class="logo"> <i class="fas fa-car"></i> <span class="s-one">Top</span> <span class="s-two"> cars</span></a>
+        
+        <nav class="navbar">
+            <a href="index.html">home</a>
+            <a href="#vehicles">vehicles</a>
+            <a href="#services">services</a>
+            <a href="#featured">featured</a>
+            <a href="#reviews">reviews</a>
+            <a href="#contact">contact</a>
+        </nav>
+        <div class="icon">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            
+            <div class="log">
+                <div id="login-btn">
+                    <a href="{% url 'login' %}" class="btn">Sign in<i class="far fa-user"></i></a>
+                    <a href="{% url 'login' %}" class="mo"><i class="far fa-user"></i></a>
+                    
+                </div>
+                <div id="register-btn">
+                    <a href="{% url 'accounts:signup' %}" class="btn">Sign up<i class="fa fa-registered"></i></a>
+                    <a href="{% url 'accounts:signup' %}" class="mo" ><i class="fa fa-registered"></i></a>
+                    
+                </div>
+            </div>
+
+        
+        <div class="search-container">
+                
+                <span id="close-search" class="fas fa-times"></span>
+                <input class="search__input" name="search" type="search" placeholder="Search" autocomplete="off">
+                <i class="fa fa-search"></i>
+        </div>
+    
+  {% endblock %}
+    
+    <!-- Start Landing -->
+    {% block content %}
+    <div class="landing">
+        <h1 id="main-content-heading" class="hero-title">
+            <img class="background-image" src="{% static 'image/shop\ image.jpg'%}" >
+            <span class="headline">
+                Shop the nation’s largest<br /> used car inventory
+            </span>
+            <span class="headline-2">Then buy online or at a TopCars near you</span>
+        </h1>
+    </div>
+    <!-- End Landing -->
+    <!-- Start Type -->
+    <div class="type" id="type">
+        <h3>Shop by type</h3>
+        
+        <div class="cars-type">
+           
+            {% for cat in category_list %} 
+            <div class="typy ">
+               
+                <a  href="{% url 'products:categoryView' cat.slug%}">
+                    {%if cat.CATImg %}
+                    <img id=featured src="{{cat.CATImg.url}}">
+                  {%else%}
+                    <img src="{% static 'static/image/defult.png' %}" alt="jeep">
+                  {% endif %}
+                 <span>{{cat.CATName}}</span></a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- End Type -->
+    <!-- Start Brands -->
+    <div class="brands" id="brand">
+        <h3>Shop by brand</h3>
+        <div class="brand-type">
+            <a href="jeep.html"><img src="image/brands/jeep.png" alt="jeep logo"></a>
+            <a href="toyota.html"><img src="image/brands/toyota.png" alt="toyota"></a>
+            <a href="ford.html"><img src="image/brands/ford.png" alt="ford"></a>
+            <a href="mercedes.html"><img src="image/brands/mercedes-benz.png" alt="mercedes-benz"></a>
+            <a href="nissan.html"><img src="image/brands/nissan.png" alt="nissan"></a>
+            <a href="honda.html"><img src="image/brands/honda.png" alt="honda"></a>
+            <a href="hyundai.html"><img src="image/brands/hyundai.png" alt="hyundai"></a>
+            <a href="dodge.html"><img src="image/brands/dodge.png" alt="dodge"></a>
+            <a href="lexus.html"><img src="image/brands/lexus.png" alt="lexus"></a>
+        </div>
+    </div>
+    <!-- End Brands -->
+    <!-- Start Life style -->
+    <div class="life-style" id="life-style">
+        <h3>Shop by lifestyle</h3>
+        <div class="style">
+            <a href="commuter.html"><img src="image/life-style/commuter.png" alt="commuter"></a>
+            <a href="eco-frindly.html"><img src="image/life-style/eco.png" alt="eco"></a>
+            <a href="family.html"><img src="image/life-style/family.png" alt="family"></a>
+            <a href="outdoor.html"><img src="image/life-style/outdoor.png" alt="outdoor"></a>
+        </div>
+    </div>
+    <!-- End Life style -->
+    
+    <!-- Start Quality -->
+    <section class="quality" id="quality">
+        <h2>Guarantee & limited warranty  <i class="fas fa-info-circle"></i> </h2>
+        <div class="top-car-quality">
+            <div class="quality-item">
+                <img src="{% static 'image/icons/24hr-test-drive.svg' %}" alt="24hr-test-drive">
+                <span>24-hour test drives
+                    <p>With 24 hours to test it out, you can see if the car you want fits you and your life.</p>
+                </span>
+            </div>
+            <div class="quality-item">
+                <img src="{% static 'image/icons/30day-returns.svg' %}" alt="30day-returns">
+                <span>30-day returns (up to 1500 miles)
+                    <p>Take a full 30 days or 1500 miles to make sure the one you buy is the one you love.</p>
+                </span>
+            </div>
+            <div class="quality-item">
+                <img src="{% static 'image/icons/30day-returns.svg' %} " alt="20day">
+                <span>All major systems covered 
+                    <p>You’ll drive worry-free for 90 days or 4,000 miles (whichever comes first).*</p>
+                </span>
+            </div>
+        </div>
+        <div class="car_link">
+            <a href="all_cars.html"> SEARCH ALL CARS </a>
+        </div>
+    </section>
+    <!-- End Quality -->
+    <!-- Start Text -->
+    <div class="text-container">
+        <p class="text">* Price excludes tax, title, tags and $299 TopCars processing fee (not required by law). Price
+            assumes that final purchase will be made in the State of KS, unless vehicle is non-transferable. Vehicle
+            subject to prior sale. Applicable transfer fees are due in advance of vehicle delivery and are separate from
+            sales transactions. Limited warranty is 90-Day/4,000-Miles, whichever comes first. See store for written
+            details. We make every effort to provide accurate information, but please verify before purchasing.
+        </p>
+    </div>
+    <!-- End Text -->
+    <!-- Footer starts -->
+    <div class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>our branches</h3>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> egypt </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> france </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> UK </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> USA </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> australia </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#type"> <i class="fas fa-arrow-right"></i> types </a>
+                <a href="#brand"> <i class="fas fa-arrow-right"></i> brands </a>
+                <a href="#life-style"> <i class="fas fa-arrow-right"></i> life style </a>
+                <a href="#vehicles"> <i class="fas fa-arrow-right"></i> populer </a>
+            </div>
+    
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="#"> <i class="fas fa-envelope"></i> anas.rabea1000@gmail.com </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> 6 October, Egypt - 400104 </a>
+            </div>
+    
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-home"></i> home </a>
+                <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+                <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+                <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+                <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+                <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+            </div>
+        </div>
+        <div class="foot">
+            <p>We Are Social</p>
+            <div class="social-icons">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fas fa-home"></i>
+                <i class="fab fa-linkedin"></i>
+            </div>
+            
+    
+    <!-- start footer ends -->
+
+    <!-- scroll top button  -->
+
+<a href="#type" class="top"><img src="image/scroll-top-img.png" alt="scroll"></a>
+
+<div class="chat" id="chat">
+    <div id="chat-overlay"></div>
+    <button> <i class="fas fa-comment-alt"></i> Chat </button>
+</div>
+
+<div class="chat-box">
+    <div class="chat-box-header">
+        Chat With TopCars
+        <span class="chat-box-toggle"><i class="fas fa-times"></i></span> 
+    </div>
+    <div class="chat-box-body">
+        <div class="chat-box-overlay">   
+        </div>
+        <div class="chat-logs"></div> <!--chat-log -->
+    </div>
+    <div class="chat-input">      
+        <form>
+            <input type="text" id="chat-input" placeholder="Send a message..."/>
+            <button type="submit" class="chat-submit" id="chat-submit"><i class="fas fa-paper-plane"></i></button>
+        </form>      
+    </div>
+</div>
+
+<div class="feedback">
+    <a href="#"><img src="{% static 'image/Qualtrics+feedback+button'%}" alt="feedback"></a>
+</div>
+{% endblock %}    

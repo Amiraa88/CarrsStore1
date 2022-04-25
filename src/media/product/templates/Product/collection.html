@@ -1,0 +1,129 @@
+ {% extends "base.html" %}
+    {%load static%}
+        <!-- Statr Header -->
+        {% block header %}
+            <a href="#" class="logo"> <i class="fas fa-car"></i> <span class="s-one">Top</span>
+            <span class="s-two"> cars</span></a>
+            <nav class="navbar">
+                <a href="{% url 'product:product_list' %}"><i class="fas fa-home"></i></a>
+            </nav>
+            {% endblock %}
+        <!-- End Header -->
+        <!-- Start sied bar -->
+        {%block content%}
+        <div id="side-menu" class="fas fa-bars"></div>
+        <div class="side-bar">
+            <h1 class="heading">Find Your Car</h1>
+            <!-- Start Box -->
+            <div class="box-1">
+                <img src="{% static 'image/image_icon_speedometer_pic_512x512.png'%}" alt="">
+                <h2>Introducing Love Your Car Guarantee!</h2>
+                <p>
+                    24-hr test drives
+                    30-day retuns <span>(up to 1500mi)</span>
+                </p>
+            </div>
+            <!-- End Box -->
+           
+        </div>   
+              
+        <!-- Start car section -->
+        <h3>{{category_name.CATName}}</h3>
+        
+        
+        <div class="cars">
+            <div class="car-container">
+                {% for item in category_name.categories.all %}   
+                <div class="cars-list " data-cat="" data-search="">
+                
+                    <a href="jeep.html">
+                        <div class="images-car">
+                            {%if item.PRDImage %}
+                            <img src="{{item.PRDImage.url}}" alt="jeep">
+                            {%else%}
+                            <img src="{% static 'static/image/defult.png' %}" alt="jeep">
+                            {% endif %}
+                        </div>
+                    </a>
+                    
+                    <div class="car-tile-content">
+                        <h3>
+                            <a href="{%url 'products:product_detail' item.PRDSlug %}">
+                                <span class="year-make">{{item}}</span>
+                                <span class="model"> {{item.PRDModel}}</span> </span>
+                            </a>
+                        </h3>
+                        <p class="info">
+                            <span class="price">${{item.PRDPrice}}</span>
+                            <span class="bullet"> • </span>
+                            <span class="miles">NEW{{item.PRDISNew}}</span>
+                        </p>
+                        <a href="{%url 'products:product_detail' item.PRDSlug %}"  class="btn"><i class="fas fa-shopping-cart"></i>View </a>
+                        <hr>
+                        <p>
+                            <span class="transfer">⁠Available at your store TopCars 6 Octoper, Egypt</span>
+                        </p>
+                         
+                    </div>
+                      
+                </div>
+                {% endfor %} 
+                </div>
+                
+        </div>
+        
+    <!-- End car section -->
+
+    <!-- Start pagination sestion -->
+    {%if product_list.has_other_pages%}
+    <div class="pagination">
+        
+           {% if product_list.has_previous %}
+              <a href="?page={{ product_list.previous_page_number }}">previous</a>
+           {%else%}  
+           <li class="disables"></li>
+           {% endif %}
+
+           
+           {%for pages in product_list.paginator.page_range %}
+             {%if product_list.number == pages %}
+               <a class="active" href="#">{{pages}}</a>
+             {%else%}
+                <a class="active" href="?page={{pages}}">{{pages}}</a>
+             {%endif %}  
+           {%endfor %}  
+          
+           
+
+           {% if product_list.has_next %}
+              <a href="?page={{ product_list.next_page_number }}">next</a>
+           {%else%}  
+              <li class="disables"></li>   
+           {% endif %}
+          
+    </div>
+    {%endif%}
+    <!-- End pagination sestion -->
+
+    <!-- start footer starts -->
+    <div class="footer">
+        <div class="box-container">
+           
+    
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="#"> <i class="fas fa-envelope"></i> anas.rabea1000@gmail.com </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> 6 October, Egypt - 400104 </a>
+            </div>
+    
+           
+        </div>
+        
+    </div>
+    
+    <!-- start footer ends -->
+    
+    <!-- scroll top button  -->
+    {% endblock %}

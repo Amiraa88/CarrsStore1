@@ -1,0 +1,130 @@
+{% extends "base.html"%}
+{%load static%}
+
+
+    <!-- Statr Header -->
+  {% block header %}  
+    
+        <a href="#" class="logo"> <i class="fas fa-car"></i> <span class="s-one">Top</span> <span class="s-two">
+                cars</span></a>
+    
+        <nav class="navbar">
+            <a href="index.html"><i class="fas fa-home"></i>home</a>
+            <a href="#vehicles">vehicles</a>
+            <a href="#services">services</a>
+            <a href="#featured">featured</a>
+            <a href="#reviews">reviews</a>
+            <a href="#contact">contact</a>
+        </nav>
+        <div class="icon">
+            <div id="menu-btn" class="fas fa-bars"></div>
+    
+            <div class="log">
+                <div id="login-btn">
+                    <a href="login.html" class="btn">Sign in<i class="far fa-user"></i></a>
+                    <a href="login.html" class="mo"><i class="far fa-user"></i></a>
+    
+                </div>
+                <div id="register-btn">
+                    <a href="register.html" class="btn">Sign up<i class="fa fa-registered"></i></a>
+                    <a href="register.html" class="mo"><i class="fa fa-registered"></i></a>
+    
+                </div>
+            </div>
+    
+            <div class="search" id="search">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    
+        <div class="search-container">
+    
+            <span id="close-search" class="fas fa-times"></span>
+            <input class="search__input" name="search" type="search" placeholder="Search" autocomplete="off">
+            <i class="fa fa-search"></i>
+        </div>
+  {% endblock %}
+    <!-- End Heeader -->
+{% block content %}
+    <div id="content-wrapper">
+
+      
+        <div class="column">
+            {%if product_detail.PRDImage %}
+              <img id=featured src="{{product_detail.PRDImage.url}}">
+            {%else%}
+              <img src="{% static 'static/image/defult.png' %}" alt="jeep">
+            {% endif %}
+            
+        </div>
+
+        <div class="column">
+            <h1>{{product_detail}}</h1>
+            <h2>{{product_detail.PRDModel}}</h2>
+            <hr>
+            <p>{{product_detail.PRDDesc}}
+            </p>
+            <div class="more-info">
+            {% if product_detail.PRDDiscount > 0 %}
+                <h3>${{product_detail.PRDPrice}}</h3>
+                <h3>${{product_detail.PRDDiscount}}</h3>
+            {% else %}    
+                <h3>${{product_detail.PRDPrice}}</h3>
+            {% endif %}
+            {% if product_detail.PRDISNew > 0 %}
+                <span class="new">New</span>
+            {% endif %}
+            {% if product_detail.PRDDiscount > 0 %}
+                <span class="sale">Sale</span>
+            {% endif %}    
+                <a  class="btn"><i class="fas fa-shopping-cart"></i> Reservation </a>
+            </div>
+        </div>
+        
+    </div>
+    <h2 class="c-heading"> Leave us a comment </h2>
+    
+    <div  class="container-comment">
+        <section class="comments" id="comments" >
+            <ul class="comment-list">
+                <li class="comment">
+                    {% for comment in product_detail.review.all %}
+                    <div class="comment-content">
+                       
+                        <div class="user">
+                            <strong>{{comment.created_by.username}}</strong> 
+                            
+                        <br>   
+                            <span>{{comment.created_date}}</span>
+                        </div>
+        
+                        <p> {{comment.comment}}</p>
+                    </div>
+                </li>
+                
+        {% endfor %}
+            </ul>
+        </section>
+        <section  class="add-comment" class="add-comment">
+            <form method="post" >
+               {% csrf_token %}
+                <div>
+                    <textarea id="comment-content" name="content-comment" class="comment-field" placeholder="Write a comment"></textarea>
+                </div>
+                
+                    <button type="submit" class="btn">add comment</button>
+               
+            </form>
+        </section>
+    </div>
+
+    
+    <!-- scroll top button  -->
+    
+    
+    
+   
+    
+    {% endblock %}

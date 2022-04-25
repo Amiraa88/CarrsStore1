@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-complete-tag",
+        "njpwerner.autodocstring",
+        "formulahendry.auto-rename-tag",
+        "aessoft.aessoft-class-autocomplete",
+        "steoates.autoimport",
+        "tabnine.tabnine-vscode",
+        "svipas.code-autocomplete"
+    ]
+}
